@@ -1,0 +1,10 @@
+There are various ways a supermarket can price their goods, which will affect the underlying data modelling. These scenarios will need to be handled:
+
+Product X costs Y
+X number of products for Y price
+Y price per X unit of measure
+Get free Z product(s) X with purchase of Y product(s) X
+X% discount with purchase of Y product(s)
+X% discount off additinal product X with purchase of Y product(s) X
+Get X products for the cost of Y products
+
