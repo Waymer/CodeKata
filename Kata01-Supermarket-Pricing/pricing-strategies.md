@@ -1,24 +1,17 @@
+### Supermarket Pricing
+
 There are various ways a supermarket can price their goods, which will affect the underlying data modeling. These scenarios will need to be handled:
 
-1.)  Product X costs Y
-
-2.)  X number of products for Y price
-
-3.)  Y price per X unit of measure
-
-4.)  Get free Z product(s) X with purchase of Y product(s) X
-
-5.)  X% discount with purchase of Y product(s)
-
-6.)  X% discount off additional product X with purchase of Y product(s) X
-
-7.)  Get X products for the cost of Y products
-
-8.)  X% off select products
-
-9.)  X amount off select products
-
-10.) X% off when spending Y or more
+1.  Product X costs Y
+2.  X number of products for Y price
+3.  Y price per X unit of measure
+4.  Get free Z product(s) X with purchase of Y product(s) X
+5.  X% discount with purchase of Y product(s)
+6.  X% discount off additional product X with purchase of Y product(s) X
+7.  Get X products for the cost of Y products
+8.  X% off select products
+9.  X amount off select products
+10. X% off when spending Y or more
 
 I will use a relational model as a starting point, since a document model doesn't really make sense here (there isn't some large chunk of data that is regularly accessed as a whole) and I'm not too familiar with others like hierarchical or network data models. 
 
@@ -30,3 +23,7 @@ Continuing with a table for the deals, I think we would need a table for each de
 
 9 and 10 are scenarios that seem like they won't fall under this table, since the deals are based on flat price amounts, whether it is a pre-requisite spend amount or discount amount. We could add columns to the original deal table to include flat price requirement or flat price discount, and so a non-null value in flat_price (flat price requirement) or in flat_discount (flat price discount) would have a null in quantity or percent_discount respectively. The other option is to have them in different tables. Since there are only these 2 that I've brainstormed earlier, it doesn't make sense to me to have them in a different table, since getting all deals would require hitting multiple tables with joins which also increases that read time. With more flat priced based discounts, it may make more sense to have different tables, and it would also eliminate the transitive functional dependencies between flat_price and quantity or flat_discount and percent_discount. If we keep it in one table, it could potentially introduce negative impacts to data integrity, with the tradeoff of less complicated queries/higher ease of use and increased speed for certain reads.
 
+
+### Kata Questions
+
+There were many thought provoking questions presented in the Kata, which I'll attempt to address.
