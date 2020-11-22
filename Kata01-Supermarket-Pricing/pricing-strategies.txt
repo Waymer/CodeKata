@@ -1,14 +1,16 @@
-There are various ways a supermarket can price their goods, which will affect the underlying data modelling. These scenarios will need to be handled:
+There are various ways a supermarket can price their goods, which will affect the underlying data modeling. These scenarios will need to be handled:
 
 Product X costs Y
 X number of products for Y price
 Y price per X unit of measure
 Get free Z product(s) X with purchase of Y product(s) X
 X% discount with purchase of Y product(s)
-X% discount off additinal product X with purchase of Y product(s) X
+X% discount off additional product X with purchase of Y product(s) X
 Get X products for the cost of Y products
 X% off select products
 X amount off select products
 X% off when spending Y or more
 
+I will use a relational model as a starting point, since a document model doesn't really make sense here and I'm not too familiar with others like hierarchical or network data models. 
 
+My first thought is that 'raw' prices should be decoupled from the existing deals. Products can be modeled initially in a simple way with columns product_id, name, cost, and unit_type. unit_type would refer to how the product quantity is measured, e.g. per unit, per X length (maybe for fabrics), or per pound, etc. Deals will be a bit harder to model, as there are many different types of deals.
