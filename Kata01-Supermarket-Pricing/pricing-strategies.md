@@ -23,7 +23,15 @@ Continuing with a table for the deals, I think we would need a table for each de
 
 9 and 10 are scenarios that seem like they won't fall under this table, since the deals are based on flat price amounts, whether it is a pre-requisite spend amount or discount amount. We could add columns to the original deal table to include flat price requirement or flat price discount, and so a non-null value in flat_price (flat price requirement) or in flat_discount (flat price discount) would have a null in quantity or percent_discount respectively. The other option is to have them in different tables. Since there are only these 2 that I've brainstormed earlier, it doesn't make sense to me to have them in a different table, since getting all deals would require hitting multiple tables with joins which also increases that read time. With more flat priced based discounts, it may make more sense to have different tables, and it would also eliminate the transitive functional dependencies between flat_price and quantity or flat_discount and percent_discount. If we keep it in one table, it could potentially introduce negative impacts to data integrity, with the tradeoff of less complicated queries/higher ease of use and increased speed for certain reads.
 
+I believe this model should be easily integrated into further use cases like checkout, stock management, etc (of course we would need to model those as well, but it seems like this kata's focus is on the pricing/deals modeling)
 
 ### Kata Questions
 
-There were many thought provoking questions presented in the Kata, which I'll attempt to address.
+There were many thought provoking questions presented in the Kata, which I'll attempt to address. 
+
+Since prices are decoupled from their deals, the discounted product in deals like "buy 1 get 1 free" would still have an underlying price, but calculations at checkout would apply the deal for the customer. Going along this line of thought, valuing the stock would have a few methods. The stock can be valued at a range from if everything was bought at full price, vs if all stock was purchased with applicable deals, giving a lower and upper bound for the revenue from the stock. Additionally, costs and prices should be separate, especially if the business wants to do profit analysis. They can also calculate the value of the stock based on what they had spent on it. 
+
+An audit trail should be kept, and this can be done by creating a new table - Deal_times. Deal_times would have a deal_time_id primary key, with deal_id foreign key and start_date and end_date, signifying the start and end dates of the deal. This will be the record of all the deals that have been implemented along with their time period, and the same deal can be repeated multiple times. 
+
+Due to the nature of some pricings, namely per length or per weight pricings, fractional money will exist. Originally I was thinking that rounding of the price should occur after all the prices of the products a customer is purchasing are added up at checkout. However, typically the customer is shown the prices on a cashier's screen, so it might be better to round them at the product level. And of course, as a business the rounding will be up :)
+
