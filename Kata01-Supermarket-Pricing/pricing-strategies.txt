@@ -7,4 +7,8 @@ Get free Z product(s) X with purchase of Y product(s) X
 X% discount with purchase of Y product(s)
 X% discount off additinal product X with purchase of Y product(s) X
 Get X products for the cost of Y products
+X% off select products
+X amount off select products
+X% off when spending Y or more
+
 
