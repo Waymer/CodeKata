@@ -1,14 +1,23 @@
 There are various ways a supermarket can price their goods, which will affect the underlying data modeling. These scenarios will need to be handled:
 
 1.)  Product X costs Y
+
 2.)  X number of products for Y price
+
 3.)  Y price per X unit of measure
+
 4.)  Get free Z product(s) X with purchase of Y product(s) X
+
 5.)  X% discount with purchase of Y product(s)
+
 6.)  X% discount off additional product X with purchase of Y product(s) X
+
 7.)  Get X products for the cost of Y products
+
 8.)  X% off select products
+
 9.)  X amount off select products
+
 10.) X% off when spending Y or more
 
 I will use a relational model as a starting point, since a document model doesn't really make sense here (there isn't some large chunk of data that is regularly accessed as a whole) and I'm not too familiar with others like hierarchical or network data models. 
